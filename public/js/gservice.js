@@ -13,10 +13,17 @@ angular.module('gservice', [])
 		var selectedLat = 30.5931;
 		var selectedLong = 114.3054;
 
-
 		//Functions
 		//--------------------------------------
 		//Refresh the map with new data
+
+		googleMapService.zoomIn = function(latitude, longitude, filteredResults, zoom){
+			locations = $rootScope.projectList;
+
+			convertToMapPoints(locations);
+
+			initialize(latitude, longitude, true, zoom)
+		}
 
 		googleMapService.refresh = function(latitude, longitude, filteredResults){
 
@@ -27,13 +34,15 @@ angular.module('gservice', [])
 			selectedLat = latitude;
 			selectedLong = longitude;
 
+			var zoom = 5;
+
 			//if filtered in the refresh()....
 			if(filteredResults){
 				
 				locations = convertToMapPoints(filteredResults);
 
 				//Then, initialize the map
-				initialize(latitude, longitude, true);
+				initialize(latitude, longitude, true, zoom);
 			} 
 
 			//If no filter is provided
@@ -45,7 +54,7 @@ angular.module('gservice', [])
 				}).error(function(){});
 */
 
-					initialize(latitude, longitude, false);
+					initialize(latitude, longitude, false, zoom);
 
 			}
 
@@ -66,7 +75,7 @@ angular.module('gservice', [])
 				var project = response[i];
 
 				//create a popup window for each record
-                var  contentString = '<img style="height:100px" src="' + project.image + '"><p><b>Name</b>:' + project.name + '<br><b>Developer</b>: ' + project.developer + '<br><b>City</b>: ' + project.city + '</p>';
+                var  contentString = '<div class="width: 50%"><img style="height:100px" src="' + project.image + '"></div><div class="width: 50%"><p><b>' + project.name + ' </b>' + project.city + '</p></div>';
             
             	locations.push(new Location(
             		new google.maps.LatLng(project.location[1], project.location[0]),
@@ -91,7 +100,7 @@ angular.module('gservice', [])
         };
 	
 		//Initialize the map
-		var initialize = function(latitude, longitude, filter){
+		var initialize = function(latitude, longitude, filter, zoom){
 
 			//Use the selected lat, long as starting point
 			var myLatLng = {lat: selectedLat, lng: selectedLong};
@@ -104,7 +113,7 @@ angular.module('gservice', [])
 
 
 				var map = new google.maps.Map(document.getElementById('map'), {
-					zoom: 5,
+					zoom: zoom,
 					scrollwheel: false,
 					center: myLatLng,
 					styles: styles3

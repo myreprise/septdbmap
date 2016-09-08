@@ -40,6 +40,14 @@ app.controller('queryController', function($scope, $log, $http, $rootScope, gser
 
 
 
+	//zoom into project coords
+	$scope.projectZoom = function(lat, lng, zoom){
+		var results = $scope.projectList;
+		console.log(results);
+		gservice.zoomIn(lat, lng, results, zoom);
+	}
+
+
 	//Query paraments incorporated into a JSON queryBody
 	$scope.queryProjects = function(){
 		//Assemble queryBody
@@ -56,9 +64,7 @@ app.controller('queryController', function($scope, $log, $http, $rootScope, gser
 
 				//count the number of records retrieved.
 				$scope.queryCount = queryResults.length;
-
 				$scope.developer = queryResults[0].developer;
-
 				$scope.projectList = queryResults;
 			})
 			.error(function(queryResults){

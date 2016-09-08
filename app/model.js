@@ -7,6 +7,7 @@ var ProjectSchema = new Schema({
     name: {type: String, required: true},
     developer: {type: String},
     city: {type: String, required: true},
+    gfa: {type: Number},
     location: {type: [Number], required: true}, // [Long, Lat],
     status: {type: String},
     image: {type: String}

@@ -10,7 +10,7 @@ angular.module('gservice', [])
 		var locations = [];
 
 		//Initialized starting coordinates
-		var selectedLat = 30.5931;
+		var selectedLat = 34.5931;
 		var selectedLong = 114.3054;
 
 		//Functions
@@ -75,10 +75,10 @@ angular.module('gservice', [])
 				var project = response[i];
 
 				//create a popup window for each record
-                var  contentString = '<div class="width: 50%"><img style="height:100px" src="' + project.image + '"></div><div class="width: 50%"><p><b>' + project.name + ' </b>' + project.city + '</p></div>';
+                var  contentString = '<div style="margin: 0 auto"><div style="margin-top: 15px"><p><b>' + project.name + ' </b>' + project.city + '</p></div></div>';
             
             	locations.push(new Location(
-            		new google.maps.LatLng(project.location[1], project.location[0]),
+            		new google.maps.LatLng(project.latitude, project.longitude),
             		new google.maps.InfoWindow({
             			content: contentString,
             			maxWidth: 320
@@ -122,10 +122,10 @@ angular.module('gservice', [])
 
 			//if a filter was used, set the search icons to yellow
 			if(filter){
-                icon = "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+                icon = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
 			} 
 			else {
-                icon = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+                icon = "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
 			}
 
 			//loop through each location and place a marker

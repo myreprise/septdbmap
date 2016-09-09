@@ -16,6 +16,7 @@ label {
 .result-text {
 	color: #fff;
 	font-size: 24px;
+	text-align: center
 }
 
 #developer-select {
@@ -24,6 +25,24 @@ label {
 }
 
 #project-search-btn {
-	background-color: #eee;
+	background-color: #fff;
 	color: #777;
+}
+
+
+.transformable {
+    -webkit-transition: height 100ms linear;
+    -moz-transition: height 100ms linear;
+    -o-transition: height 100ms linear;
+    -ms-transition: height 100ms linear;
+    transition: height 100ms linear;
+
+}
+
+.small {
+    height:300px;
+}
+
+.big {
+    height:500px;
 }

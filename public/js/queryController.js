@@ -1,6 +1,5 @@
 var app = angular.module('queryController', ['gservice']);
 
-
 app.controller('queryController', function($scope, $log, $http, $rootScope, gservice){
 
 	$http.get('/projects').success(function(json){
@@ -37,16 +36,6 @@ app.controller('queryController', function($scope, $log, $http, $rootScope, gser
 		this.image = queryProject.image;
 		this.year = queryProject.year;
 	}
-
-
-
-	//zoom into project coords
-	$scope.projectZoom = function(lat, lng, zoom){
-		var results = $scope.projectList;
-		console.log(results);
-		gservice.zoomIn(lat, lng, results, zoom);
-	}
-
 
 	//Query paraments incorporated into a JSON queryBody
 	$scope.queryProjects = function(){
